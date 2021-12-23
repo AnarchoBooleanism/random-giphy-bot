@@ -37,5 +37,3 @@ def api_request(message_id, tag):
         return {message_id: data['data']['url']}
     else:
         return {message_id: None}
-
-print(api_request('2dj9vj', 'chowder'))
