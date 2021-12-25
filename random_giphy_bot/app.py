@@ -24,24 +24,20 @@ def run():
 
     @client.event
     async def on_message(message):
-        if message.author == client.user:
+        if message.author.id == client.user.id:
             return
         
         if "!gif" in message.content.split():
             if len(message.content.split()) != 2:
-                await message.channel.send("!gif accepts only one word.")
+                await message.reply("!gif accepts only one word.")
             else:
-                for runs in range(5):
-                    response = giphy_api_handler.api_request(message.content.split()[1])
-                    if response != -1:
-                        break
-                    await asyncio.sleep(2)
+                response = await giphy_api_handler.batch_request(message.content.split()[1])
                 if response == -1:
-                    await message.channel.send("Giffybot is broken and was unable to find a GIF.")
+                    await message.reply("Giffybot is broken and was unable to find a GIF.")
                 elif not response:
-                    await message.channel.send("There was no GIF to be found.")
+                    await message.reply(f"No GIF found for \"{message.content.split()[1]}\".")
                 else:
-                    await message.channel.send(response)
+                    await message.reply(response)
 
     client.run(TOKEN)
 
