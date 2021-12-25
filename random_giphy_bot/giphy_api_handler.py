@@ -8,7 +8,7 @@ load_dotenv()
 
 url = "http://api.giphy.com/v1/gifs/random"
 
-def api_request(message_id, tag):
+def api_request(tag):
     '''
     Request a GIF link from GIPHY for a certain tag.
 
@@ -31,9 +31,8 @@ def api_request(message_id, tag):
     except HTTPError as http_response:
         print(f'Error when requesting {"".join((url, "?", params))}: {http_response}')
         return -1
-
-    print(json.dumps(data, sort_keys=True, indent=4))
+    
     if data['data']:
-        return {message_id: data['data']['url']}
+        return data['data']['url']
     else:
-        return {message_id: None}
+        return None
