@@ -16,7 +16,7 @@ def api_request(tag):
         Parameters:
             tag (str): Tag of GIF being requested
         Returns:
-            url (str, int, or None): URL of requested GIF. May be an int or None if nothing is sent.
+            url (str, int, or None): URL of requested GIF. May be -1 or None if nothing is sent.
     
     '''
     assert type(tag) is str, "Tag must be a string"
@@ -42,7 +42,14 @@ def api_request(tag):
 
 async def batch_request(tag, request_tries=5):
     """
-    Request.
+    Request a GIF from GIPHY, but try a certain amount of times if there is any failure.
+
+    Parameters:
+        tag (str): Tag of GIF being requested
+        request_tries (int): Amount of times to try requesting GIF again after failure. 5 on default.
+    Returns:
+        response (str): URL of GIF being requested. May be -1 or None if nothing is sent. 
+
     """
     assert type(tag) is str, "Tag must be a string"
     assert len(tag.split()) == 1, "Tag must be exactly one word"

@@ -1,7 +1,6 @@
 import os
-from random_giphy_bot import giphy_api_handler
+from random_giphy_bot import commands
 import discord
-import asyncio
 from dotenv import load_dotenv
 
 def run():
@@ -27,17 +26,13 @@ def run():
         if message.author.id == client.user.id:
             return
         
-        if "!gif" in message.content.split():
-            if len(message.content.split()) != 2:
-                await message.reply("!gif accepts only one word.")
+        command = message.content.split()[0].lower()
+
+        if message.content.startswith("!"):
+            if command in commands.command_list:
+                await commands.command_list[command](message=message)
             else:
-                response = await giphy_api_handler.batch_request(message.content.split()[1])
-                if response == -1:
-                    await message.reply("Giffybot is broken and was unable to find a GIF.")
-                elif not response:
-                    await message.reply(f"No GIF found for \"{message.content.split()[1]}\".")
-                else:
-                    await message.reply(response)
+                await message.reply(f"Invalid command: `{command}`")
 
     client.run(TOKEN)
 
