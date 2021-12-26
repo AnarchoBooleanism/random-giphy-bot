@@ -10,7 +10,7 @@ load_dotenv()
 url = "http://api.giphy.com/v1/gifs/random"
 
 def api_request(tag):
-    '''
+    """
     Request a GIF link from GIPHY for a certain one-word tag.
 
         Parameters:
@@ -18,7 +18,7 @@ def api_request(tag):
         Returns:
             url (str, int, or None): URL of requested GIF. May be -1 or None if nothing is sent.
     
-    '''
+    """
     assert type(tag) is str, "Tag must be a string"
     assert len(tag.split()) == 1, "Tag must be exactly one word"
 

@@ -9,6 +9,7 @@ def run():
     GUILD = os.getenv('DISCORD_GUILD')
 
     client = discord.Client()
+    history = dict()
 
     @client.event
     async def on_ready():
@@ -30,7 +31,7 @@ def run():
 
         if message.content.startswith("!"):
             if command in commands.command_list:
-                await commands.command_list[command](message=message)
+                await commands.command_list[command](message=message, history=history)
             else:
                 await message.reply(f"Invalid command: `{command}`")
 
