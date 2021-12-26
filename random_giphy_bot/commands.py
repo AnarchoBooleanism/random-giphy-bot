@@ -29,8 +29,13 @@ async def gif(message, history, *args, **kwargs):
     if len(message.content.split()) != 2:
         await message.reply("`!gif` accepts only one word.")
     else:
+        if (type(message.guild) is None):
+            new_tag = (message.guild.id, message.channel.id, message.author.id)
+        else:
+            new_tag = (message.channel.id, message.author.id)
+        
         gif_tag = message.content.split()[1]
-        history[(message.guild.id, message.channel.id, message.author.id)] = gif_tag
+        history[new_tag] = gif_tag
         await gif_finder(tag=gif_tag, message=message)
 
 async def repeat(message, history, *args, **kwargs):
@@ -42,7 +47,10 @@ async def repeat(message, history, *args, **kwargs):
         history (dict): A list of previous used words, per server, channel, and user.
     
     """
-    previous_tag = (message.guild.id, message.channel.id, message.author.id)
+    if (type(message.guild) is None):
+        previous_tag = (message.guild.id, message.channel.id, message.author.id)
+    else:
+        previous_tag = (message.channel.id, message.author.id)
 
     if previous_tag in history:
         await gif_finder(tag=history[previous_tag], message=message)
