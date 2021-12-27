@@ -1,6 +1,7 @@
 import json
 import os
 import asyncio
+from aioconsole import ainput, aprint
 from urllib import parse, request
 from urllib.error import HTTPError
 from dotenv import load_dotenv
@@ -32,7 +33,7 @@ def api_request(tag):
         with request.urlopen(''.join((url, '?', params))) as response:
             data = json.loads(response.read())
     except HTTPError as http_response:
-        print(f'Error when requesting {"".join((url, "?", params))}: {http_response}')
+        aprint(f'Error when requesting {"".join((url, "?", params))}: {http_response}')
         return -1
     
     if data['data']:

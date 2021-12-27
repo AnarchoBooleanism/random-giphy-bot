@@ -1,5 +1,6 @@
 import os
 import asyncio
+from aioconsole import ainput, aprint
 from random_giphy_bot import commands
 from random_giphy_bot.console_handler import console
 import discord
@@ -19,7 +20,7 @@ def run():
             if guild.name == GUILD:
                 break
 
-        print(
+        aprint(
             f'{client.user} is connected to the following guild(s):\n'
             f'{guild.name}(id: {guild.id})'
         )

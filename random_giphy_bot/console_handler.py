@@ -1,5 +1,5 @@
 import asyncio
-import aioconsole
+from aioconsole import ainput, aprint
 
 async def bot_quit(discord_client=None, giphy_handler=None, *args, **kwargs):
     """
@@ -15,7 +15,7 @@ async def bot_quit(discord_client=None, giphy_handler=None, *args, **kwargs):
 
 async def console_help(*args, **kwargs):
     """Print out list of commands and what they do."""
-    await aioconsole.aprint(f"""Available commands to use:
+    await aprint(f"""Available commands to use:
 help - Show list of available commands.
 quit, exit - Exit the program safely.
 """)
@@ -37,11 +37,11 @@ async def console(discord_client=None, giphy_handler=None):
 
     """
     console_input = None
-    await aioconsole.aprint("You are now running Random GIPHY Bot! Type \"help\" for more!")
+    await aprint("You are now running Random GIPHY Bot! Type \"help\" for more!")
     await asyncio.sleep(5)
 
     while console_input not in ["quit", "exit"]:
-        console_input = await aioconsole.ainput(">>> ")
+        console_input = await ainput(">>> ")
         if console_input:
             command = console_input.split()[0]
         else:
@@ -50,7 +50,7 @@ async def console(discord_client=None, giphy_handler=None):
         if command in command_list:
             await command_list[command](discord_client=discord_client, giphy_handler=giphy_handler)
         elif command:
-            await aioconsole.aprint(f"Command \"{command}\" is invalid. Type \"help\" for more.")
+            await aprint(f"Command \"{command}\" is invalid. Type \"help\" for more.")
 
 
 if __name__ == "__main__":
