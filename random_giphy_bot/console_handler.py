@@ -37,6 +37,8 @@ async def console(discord_client=None, giphy_handler=None):
 
     """
     console_input = None
+    await aioconsole.aprint("You are now running Random GIPHY Bot! Type \"help\" for more!")
+    await asyncio.sleep(5)
 
     while console_input not in ["quit", "exit"]:
         console_input = await aioconsole.ainput(">>> ")
