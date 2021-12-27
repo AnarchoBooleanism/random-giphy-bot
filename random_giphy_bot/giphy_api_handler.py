@@ -1,6 +1,7 @@
 import json
 import os
 import asyncio
+import aiohttp
 from aioconsole import ainput, aprint
 from urllib import parse, request
 from urllib.error import HTTPError
