@@ -14,7 +14,7 @@ setup(
     author_email='naguerr2@uci.edu',
     url='https://github.com/AnarchoBooleanism/random-giphy-bot',
     packages=find_packages(),
-    install_requires=['discord.py', 'python-dotenv'],
+    install_requires=['discord.py', 'python-dotenv', 'aioconsole'],
     python_requires='>=3.10',
     entry_points={
         'console_scripts': [

@@ -1,5 +1,7 @@
 import os
+import asyncio
 from random_giphy_bot import commands
+from random_giphy_bot.console_handler import console
 import discord
 from dotenv import load_dotenv
 
@@ -34,8 +36,13 @@ def run():
                 await commands.command_list[command](message=message, history=history)
             else:
                 await message.reply(f"Invalid command: `{command}`")
-
+    
+    # Start console (passing in Discord client and GIPHY handler), then run Discord client, which is blocking.
+    # When Discord client stops, then it will make sure that the console loop finishes before ending. 
+    console_loop = asyncio.get_event_loop()
+    console_task = console_loop.create_task(console(discord_client=client))
     client.run(TOKEN)
+    console_loop.run_until_complete(console_task)
 
 if __name__ == "__main__":
     run()
