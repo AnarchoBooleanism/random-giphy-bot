@@ -8,6 +8,7 @@ import discord
 from dotenv import load_dotenv
 
 def run():
+    """The main function of the Discord bot."""
     load_dotenv()
     DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
     DISCORD_GUILD = os.getenv('DISCORD_GUILD')

@@ -13,13 +13,13 @@ class GiphyHandler:
         is_closed (bool): Boolean that represents when GiphyHandler is closed.
         is_started (bool): Boolean that represents when GiphyHandler is started.
     Methods:
-        reload(api_key):
+        async reload(api_key):
             Close GiphyHandler temporarily, stop any current requests, input a new API key, and start it again.
-        close():
+        async close():
             Stop any current requests, and set GiphyHandler as closed.
-        random_request(tag, request_tries=5):
+        async random_request(tag, request_tries=5):
             Request a GIPHY URL with a certain tag. If a try fails, then it starts again.
-        request_handler(tag, is_last_attempt=True):
+        async request_handler(tag, is_last_attempt=True):
             Handle a GIPHY URL request, and process the results. If at the last attempt and it doesn't work, then it prints out the error.
         start(api_key):
             Start GiphyHandler, and input a new API key.
@@ -32,6 +32,7 @@ class GiphyHandler:
     is_started = False
 
     async def reload(self, api_key):
+        """Close GiphyHandler temporarily, stop any current requests, input a new API key, and start it again."""
         assert self.is_started is True, "Giphy handler must be started first"
         assert type(api_key) is str, "Giphy API key must be a string"
         assert len(api_key) > 0, "Giphy API key must be longer than 0"
@@ -48,6 +49,7 @@ class GiphyHandler:
         self.is_started = True
 
     async def close(self):
+        """Stop any current requests, and set GiphyHandler as closed."""
         assert self.is_started is True, "Giphy handler must be started first"
 
         await aprint("Closing GIPHY handler...")
@@ -56,6 +58,7 @@ class GiphyHandler:
         self.is_started = False
 
     async def random_request(self, tag, request_tries=5):
+        """Request a GIPHY URL with a certain tag. If a try fails, then it starts again."""
         assert request_tries > 0, "Number of attempts must be more than 0"
         assert self.is_started is True, "Giphy handler must be started first"
 
@@ -72,6 +75,7 @@ class GiphyHandler:
         return response
 
     async def request_handler(self, tag, is_last_attempt=True):
+        """Handle a GIPHY URL request, and process the results. If at the last attempt and it doesn't work, then it prints out the error."""
         params = parse.urlencode({
             'tag': tag,
             'api_key': self.api_key,
@@ -99,6 +103,7 @@ class GiphyHandler:
         pass
 
     def start(self, api_key):
+        """Start GiphyHandler, and input a new API key."""
         assert type(api_key) is str, "Giphy API key must be a string"
         assert len(api_key) > 0, "Giphy API key must be longer than 0"
 
