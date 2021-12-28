@@ -2,7 +2,7 @@ import os
 import asyncio
 from aioconsole import ainput, aprint
 from random_giphy_bot import commands
-from random_giphy_bot.console_handler import console
+from random_giphy_bot.console_handler import ConsoleHandler
 from random_giphy_bot.giphy_api_handler import GiphyHandler
 import discord
 from dotenv import load_dotenv
@@ -16,6 +16,7 @@ def run():
     client = discord.Client()
     history = dict()
     giphy_handler = GiphyHandler()
+    console = ConsoleHandler(discord_client=client, giphy_handler=giphy_handler)
 
     @client.event
     async def on_ready():
@@ -44,7 +45,7 @@ def run():
     # Start console (passing in Discord client and GIPHY handler), then run Discord client, which is blocking.
     # When Discord client stops, then it will make sure that the console loop finishes before ending. 
     console_loop = asyncio.get_event_loop()
-    console_task = console_loop.create_task(console(discord_client=client, giphy_handler=giphy_handler))
+    console_task = console_loop.create_task(console.run())
     giphy_handler.start(GIPHY_API_KEY)
     print("Opening Discord bot...")
     client.run(DISCORD_TOKEN)
