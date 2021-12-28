@@ -46,6 +46,7 @@ def run():
     console_loop = asyncio.get_event_loop()
     console_task = console_loop.create_task(console(discord_client=client, giphy_handler=giphy_handler))
     giphy_handler.start(GIPHY_API_KEY)
+    print("Opening Discord bot...")
     client.run(DISCORD_TOKEN)
     console_loop.run_until_complete(console_task)
 

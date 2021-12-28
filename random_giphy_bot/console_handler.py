@@ -12,7 +12,9 @@ async def bot_quit(discord_client=None, giphy_handler=None, *args, **kwargs):
     """
     if giphy_handler:
         await giphy_handler.close()
+    await asyncio.sleep(2)
     if discord_client:
+        await aprint("Closing Discord client...")
         await discord_client.close()
 
 async def console_help(*args, **kwargs):
