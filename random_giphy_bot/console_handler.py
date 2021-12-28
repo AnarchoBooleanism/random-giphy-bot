@@ -92,7 +92,11 @@ reload - Reload the GIPHY handler and Discord client with updated tokens and API
     def __init__(self, discord_client=None, giphy_handler=None):
         """Initialize object by passing in a Discord client class and a GIPHY handler class."""
         self.discord_client = discord_client
+        if not self.discord_client:
+            print("Warning: No discord.Client object was passed into ConsoleHandler")
         self.giphy_handler = giphy_handler
+        if not self.giphy_handler:
+            print("Warning: No GiphyHandler object was passed into ConsoleHandler")
 
 
 if __name__ == "__main__":
