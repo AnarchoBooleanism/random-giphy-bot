@@ -1,5 +1,7 @@
 import asyncio
+import os
 from aioconsole import ainput, aprint
+from dotenv import load_dotenv
 
 async def bot_quit(discord_client=None, giphy_handler=None, *args, **kwargs):
     """
@@ -17,17 +19,41 @@ async def bot_quit(discord_client=None, giphy_handler=None, *args, **kwargs):
         await aprint("Closing Discord client...")
         await discord_client.close()
 
+async def bot_reload(discord_client=None, giphy_handler=None, *args, **kwargs):
+    """
+    Reload environmental variables and reset GIPHY handler and Discord handler with new tokens/API keys.
+
+    Parameters:
+        discord_client (client) - Discord client to be reloaded with new token.
+        giphy_handler (class) - aiohttp class to be reloaded with new API key.
+
+    """
+    load_dotenv(override=True)
+
+    DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+    GIPHY_API_KEY = os.getenv('GIPHY_API_KEY')
+
+    if giphy_handler:
+        await giphy_handler.reload(api_key=GIPHY_API_KEY)
+    if discord_client:
+        await aprint("Logging in Discord bot with new token...")
+        try:
+            await discord_client.login(DISCORD_TOKEN) # Note: Test this somewhere else besides Windows to see if it actually works...
+        except BaseException as problem:
+            await aprint("Could not log in with new Discord token:", problem)
+
 async def console_help(*args, **kwargs):
     """Print out list of commands and what they do."""
     await aprint(f"""Available commands to use:
 help - Show list of available commands.
 quit, exit - Exit the program safely.
-""")
+reload - Reload the GIPHY handler and Discord client with updated tokens and API keys.""")
 
 # A list of commands that the console will refer to.
 command_list = {
     "quit": bot_quit,
     "exit": bot_quit,
+    "reload": bot_reload,
     "help": console_help
 }
 
