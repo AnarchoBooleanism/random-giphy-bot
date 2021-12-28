@@ -8,10 +8,10 @@ class GiphyHandler:
     A class to handle GIPHY API requests asynchonously. Must be started before any methods are used.
 
     Attributes:
-        url (str): URL to look up for requests
-        api_key (str): API key to use for requests
-        is_closed (bool): Boolean that represents when GiphyHandler is closed.
-        is_started (bool): Boolean that represents when GiphyHandler is started.
+        url (str): URL to look up for requests (default: http://api.giphy.com/v1/gifs/random)
+        api_key (str): API key to use for requests (default: None)
+        is_closed (bool): Boolean that represents when GiphyHandler is closed. (default: False)
+        is_started (bool): Boolean that represents when GiphyHandler is started. (default: False)
     Methods:
         async reload(api_key):
             Close GiphyHandler temporarily, stop any current requests, input a new API key, and start it again.
