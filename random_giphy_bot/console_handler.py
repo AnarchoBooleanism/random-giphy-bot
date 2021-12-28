@@ -10,6 +10,8 @@ async def bot_quit(discord_client=None, giphy_handler=None, *args, **kwargs):
         giphy_handler (class) - aiohttp class with a connection to be closed.
     
     """
+    if giphy_handler:
+        await giphy_handler.close()
     if discord_client:
         await discord_client.close()
 

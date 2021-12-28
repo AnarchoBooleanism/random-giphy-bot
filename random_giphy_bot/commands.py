@@ -1,6 +1,6 @@
 from random_giphy_bot import giphy_api_handler
 
-async def gif_finder(tag, message):
+async def gif_finder(tag, message, giphy_handler):
     """
     Reply to a message with a URL to a GIF, or another message if a GIF cannot be found.
 
@@ -9,7 +9,7 @@ async def gif_finder(tag, message):
         message (message): Discord.py message to be used and analyzed.
     
     """
-    response = await giphy_api_handler.batch_request(tag)
+    response = await giphy_handler.random_request(tag)
     if response == -1:
         await message.reply("Giffybot is broken and was unable to find a GIF.")
     elif not response:
@@ -17,7 +17,7 @@ async def gif_finder(tag, message):
     else:
         await message.reply(response)
 
-async def gif(message, history, *args, **kwargs):
+async def gif(message, history, giphy_handler, *args, **kwargs):
     """
     Handle a command to request a URL to a GIF from a certain word.
 
@@ -36,9 +36,9 @@ async def gif(message, history, *args, **kwargs):
         
         gif_tag = message.content.split()[1]
         history[new_tag] = gif_tag
-        await gif_finder(tag=gif_tag, message=message)
+        await gif_finder(tag=gif_tag, message=message, giphy_handler=giphy_handler)
 
-async def repeat(message, history, *args, **kwargs):
+async def repeat(message, history, giphy_handler, *args, **kwargs):
     """
     Handle a command to request a URL to a GIF from a previously selected word.
 
@@ -53,7 +53,7 @@ async def repeat(message, history, *args, **kwargs):
         previous_tag = (message.channel.id, message.author.id)
 
     if previous_tag in history:
-        await gif_finder(tag=history[previous_tag], message=message)
+        await gif_finder(tag=history[previous_tag], message=message, giphy_handler=giphy_handler)
     else:
         await message.reply("Giffybot doesn't have a previous word query to work off of. Use `!gif` first.")
 
