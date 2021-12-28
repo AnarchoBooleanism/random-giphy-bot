@@ -19,8 +19,8 @@ class GiphyHandler:
             Stop any current requests, and set GiphyHandler as closed.
         random_request(tag, request_tries=5):
             Request a GIPHY URL with a certain tag. If a try fails, then it starts again.
-        request_handler(tag):
-            Handle a GIPHY URL request, and process the results.
+        request_handler(tag, is_last_attempt=True):
+            Handle a GIPHY URL request, and process the results. If at the last attempt and it doesn't work, then it prints out the error.
         start(api_key):
             Start GiphyHandler, and input a new API key.
     
@@ -62,7 +62,8 @@ class GiphyHandler:
         response = None
         for attempt in range(request_tries):
             if not self.is_closed:
-                response = await self.request_handler(tag=tag)
+                is_last_attempt = True if attempt == request_tries - 1 else False # Checks if it is last attempt, for error checking purposes
+                response = await self.request_handler(tag=tag, is_last_attempt=is_last_attempt)
             if response != -1:
                 return response
             if self.is_closed:
@@ -70,16 +71,18 @@ class GiphyHandler:
         
         return response
 
-    async def request_handler(self, tag):
+    async def request_handler(self, tag, is_last_attempt=True):
         params = parse.urlencode({
             'tag': tag,
             'api_key': self.api_key,
             'limit': '1'
         })
 
+        requested_url = ''.join((self.url, '?', params))
+
         async with aiohttp.ClientSession() as session:
             if not self.is_closed:
-                async with session.get(''.join((self.url, '?', params))) as response:
+                async with session.get(requested_url) as response:
                     if not self.is_closed:
                         data = await response.json()
 
@@ -88,6 +91,8 @@ class GiphyHandler:
         elif 'data' in data: # If data is passed but there is no content
             return None
         else: # If no data is passed
+            if is_last_attempt and data:
+                await aprint(f"Could not successfully receive \"{requested_url}\": {data['message']}")
             return -1
 
     def __init__(self):
