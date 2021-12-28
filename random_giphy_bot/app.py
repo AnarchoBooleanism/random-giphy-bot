@@ -17,7 +17,7 @@ def run():
     client = discord.Client()
     history = dict()
     giphy_handler = GiphyHandler()
-    console = ConsoleHandler(discord_client=client, giphy_handler=giphy_handler)
+    console = ConsoleHandler(discord_client=client, giphy_handler=giphy_handler, history=history)
 
     @client.event
     async def on_ready():

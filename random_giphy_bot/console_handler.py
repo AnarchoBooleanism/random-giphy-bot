@@ -10,6 +10,7 @@ class ConsoleHandler:
     Attributes:
         discord_client (discord.Client): Discord client class that ConsoleHandler will communicate with. (default: None)
         giphy_handler (GiphyHandler): GIPHY handler class that ConsoleHandler will communicate with. (default: None)
+        history (dict): Dictionary object that stores previous queries per guild, channel, and user. (default: None)
         command_list (dict): Dictionary matching console commands to ConsoleHandler methods.
     Methods:
         async program_quit():
@@ -18,6 +19,8 @@ class ConsoleHandler:
             Reload environmental variables and reset GIPHY handler and Discord handler with new tokens/API keys.
         async program_help():
             Print out list of commands and what they do.
+        async program_clear_history():
+            Clear random GIF query history.
         async run():
             Receive input for commands and execute commands asynchonously.
         __init__(discord_client=None, giphy_handler=None):
@@ -26,6 +29,7 @@ class ConsoleHandler:
     """
     discord_client = None
     giphy_handler = None
+    history = None
 
     # Command methods
 
@@ -59,14 +63,26 @@ class ConsoleHandler:
         await aprint(f"""Available commands to use:
 help - Show list of available commands.
 quit, exit - Exit the program safely.
-reload - Reload the GIPHY handler and Discord client with updated tokens and API keys.""")
+reload - Reload the GIPHY handler and Discord client with updated tokens and API keys.
+clearhistory - Clear random GIF query history.""")
+
+    async def program_clear_history(self):
+        """Clear random GIF query history."""
+        if type(self.history) is dict and self.history:
+            await aprint(f"Clearing {len(self.history)} value(s) from history...")
+            self.history.clear()
+        elif not type(self.history) is dict:
+            await aprint("History is not a dictionary object.")
+        else:
+            await aprint("Nothing to clear from history.")
 
     # A list of commands that the console will refer to.
     command_list = {
         "quit": program_quit,
         "exit": program_quit,
         "reload": program_reload,
-        "help": program_help
+        "help": program_help,
+        "clearhistory": program_clear_history
     }
 
     # Non-command methods
@@ -89,7 +105,7 @@ reload - Reload the GIPHY handler and Discord client with updated tokens and API
             elif command:
                 await aprint(f"Command \"{command}\" is invalid. Type \"help\" for more.")
 
-    def __init__(self, discord_client=None, giphy_handler=None):
+    def __init__(self, discord_client=None, giphy_handler=None, history=None):
         """Initialize object by passing in a Discord client class and a GIPHY handler class."""
         self.discord_client = discord_client
         if not self.discord_client:
@@ -97,6 +113,9 @@ reload - Reload the GIPHY handler and Discord client with updated tokens and API
         self.giphy_handler = giphy_handler
         if not self.giphy_handler:
             print("Warning: No GiphyHandler object was passed into ConsoleHandler")
+        self.history = history
+        if not self.history:
+            print("Warning: No history dict was passed into ConsoleHandler")
 
 
 if __name__ == "__main__":
