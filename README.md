@@ -3,17 +3,19 @@ Discord bot that gives a random GIF from GIPHY, based on a single word, with a c
 
 ## Discord features
 `!gif (tag)` - Request a random GIF with a certain tag. Must be one word.
-[Example of !gif Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/gif_command_example.png?raw=true)
+![Example of !gif Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/gif_command_example.png?raw=true)
 `!repeat` - Request a random GIF with a previously requested tag.
-[Example of !repeat Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/repeat_command_example.png?raw=true)
+![Example of !repeat Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/repeat_command_example.png?raw=true)
 `!help` - Lists commands available with the bot.
-[Example of !help Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/help_command_example.png?raw=true)
+![Example of !help Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/help_command_example.png?raw=true)
 
 ## Console features
-`help` - Show list of available commands.
-`quit, exit` - Exit the program safely.
-`reload` - Reload the GIPHY handler and Discord client with updated tokens and API keys.
-`clearhistory` - Clear random GIF query history.
+| Command | Description |
+| ------- | ----------- |
+|`help` | Show list of available commands. |
+| `quit, exit` | Exit the program safely. |
+| `reload` | Reload the GIPHY handler and Discord client with updated tokens and API keys. |
+| `clearhistory` | Clear random GIF query history. |
 
 ## Requirements
 random-giphy-bot requires a Python version of `>=3.10`.
