@@ -114,7 +114,7 @@ clearhistory - Clear random GIF query history.""")
         if not self.giphy_handler:
             print("Warning: No GiphyHandler object was passed into ConsoleHandler")
         self.history = history
-        if not self.history:
+        if not type(self.history) is dict:
             print("Warning: No history dict was passed into ConsoleHandler")
 
 
