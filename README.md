@@ -2,12 +2,12 @@
 Discord bot that gives a random GIF from GIPHY, based on a single word, with a console to remotely manage it.
 
 ## Discord features
-`!gif (tag)` - Request a random GIF with a certain tag. Must be one word.
-![Example of !gif Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/gif_command_example.png?raw=true)
-`!repeat` - Request a random GIF with a previously requested tag.
-![Example of !repeat Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/repeat_command_example.png?raw=true)
-`!help` - Lists commands available with the bot.
-![Example of !help Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/help_command_example.png?raw=true)
+`!gif (tag)` - Request a random GIF with a certain tag. Must be one word.  
+![Example of !gif Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/gif_command_example.png?raw=true)  
+`!repeat` - Request a random GIF with a previously requested tag.  
+![Example of !repeat Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/repeat_command_example.png?raw=true)  
+`!help` - Lists commands available with the bot.  
+![Example of !help Discord command](https://github.com/AnarchoBooleanism/random-giphy-bot/blob/main/README-content/help_command_example.png?raw=true)  
 
 ## Console features
 | Command | Description |
