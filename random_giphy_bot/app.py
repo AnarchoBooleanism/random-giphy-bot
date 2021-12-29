@@ -30,6 +30,11 @@ def run():
             f'{guild.name}(id: {guild.id})'
         )
 
+        await asyncio.sleep(5)
+        activity = discord.Activity(type=discord.ActivityType.watching, name="GIFs, use \"!help\"!")
+        await client.change_presence(status=discord.Status.idle, activity=activity)
+
+
     @client.event
     async def on_message(message):
         if message.author.id == client.user.id:
