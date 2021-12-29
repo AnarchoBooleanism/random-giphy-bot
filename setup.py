@@ -21,10 +21,10 @@ setup(
             'random_giphy_bot = random_giphy_bot.app:run',
             'console_handler = random_giphy_bot:console_handler:console_test'
         ]
-    },
-    data_files={
-        '': ['.env', '.env*']
-    }
+    }#,
+    # data_files={
+    #     '': ['.env', '.env*']
+    # }
 )
 
 # Note for future: If adding tests or other directories that shouldn't be added as packages, replace find_packages() with find_packages(exclude=('tests*', etc etc))
