@@ -5,7 +5,7 @@ with open('README.md') as f:
 
 setup(
     name='random-giphy-bot',
-    version='0.1.0dev',
+    version='1.0.0',
     description='Discord bot that gives a random GIF from GIPHY, based on a single word.',
     license='LGPL 2.1',
     long_description=long_description,
@@ -18,7 +18,8 @@ setup(
     python_requires='>=3.10',
     entry_points={
         'console_scripts': [
-            'random_giphy_bot = random_giphy_bot.app:run'
+            'random_giphy_bot = random_giphy_bot.app:run',
+            'console_handler = random_giphy_bot:console_handler:console_test'
         ]
     },
     data_files={
@@ -26,4 +27,4 @@ setup(
     }
 )
 
-# Note: If adding tests or other directories that shouldn't be added as packages, replace find_packages() with find_packages(exclude=('tests*', etc etc))
+# Note for future: If adding tests or other directories that shouldn't be added as packages, replace find_packages() with find_packages(exclude=('tests*', etc etc))

@@ -72,7 +72,7 @@ clearhistory - Clear random GIF query history.""")
             await aprint(f"Clearing {len(self.history)} value(s) from history...")
             self.history.clear()
         elif not type(self.history) is dict:
-            await aprint("History is not a dictionary object.")
+            await aprint("Cannot clear history. A history dictionary was not passed into ConsoleHandler.")
         else:
             await aprint("Nothing to clear from history.")
 
@@ -117,7 +117,11 @@ clearhistory - Clear random GIF query history.""")
         if not type(self.history) is dict:
             print("Warning: No history dict was passed into ConsoleHandler")
 
-
-if __name__ == "__main__":
+def console_test():
+    print("Note: You are running the console standalone!")
+    """Run the console standalone."""
     console = ConsoleHandler()
     asyncio.run(console.run())
+
+if __name__ == "__main__":
+    console_test()
