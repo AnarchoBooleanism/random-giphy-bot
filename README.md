@@ -30,8 +30,10 @@ Next, copy the repository, or a [release](https://github.com/AnarchoBooleanism/r
 
 Next, get a [Discord bot token](https://discord.com/developers/) and a [GIPHY API key](https://developers.giphy.com/).
 Setup a `.env` file in the `random_giphy_bot` directory, and insert these values:
-    GIPHY_API_KEY=(Your GIPHY API key)
-    DISCORD_TOKEN=(Your Discord token)
+```
+GIPHY_API_KEY=(Your GIPHY API key)
+DISCORD_TOKEN=(Your Discord token)
+```
 
 To run, make sure you are in the root directory of the repository/release, and run this command:
 `python -m random_giphy_bot`
