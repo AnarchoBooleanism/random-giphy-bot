@@ -1,5 +1,6 @@
 # random-giphy-bot
 Discord bot that gives a random GIF from GIPHY, based on a single word, with a console to remotely manage it.
+Demonstration: [https://youtu.be/qzUwiL4S7ro](https://youtu.be/qzUwiL4S7ro)
 
 ## Discord features
 `!gif (tag)` - Request a random GIF with a certain tag. Must be one word.  
